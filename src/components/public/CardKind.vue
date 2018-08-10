@@ -56,6 +56,9 @@ export default {
             p {
                 height: 100%;
                 overflow: hidden;
+                span {
+                    color: #52C7CA;
+                }
             }
         }
     }
