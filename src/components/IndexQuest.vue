@@ -4,10 +4,10 @@
             <div class="scollTitle">燕大机器人</div>
             <CardKind />
             <div class="common">常见问题</div>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <Card @handleClick="questDetail($event, 1)"/>
+            <Card @handleClick="questDetail($event, 2)" />
+            <Card @handleClick="questDetail($event, 3)" />
+            <Card @handleClick="questDetail($event, 4)" />
         </div>
     </Layout>
 </template>
@@ -34,8 +34,10 @@ export default {
             console.log('indexBack')
         },
         inputFocus() {
-            console.log('index search')
             this.$router.push('/searchlist')
+        },
+        questDetail(e, questId) {
+            this.$router.push(`/questdetail/${questId}`)
         }
     }
 }

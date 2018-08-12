@@ -58,8 +58,8 @@ export default {
         }
     },
     methods: {
-        onClickKind(e, i) {
-            console.log('click kind', i)
+        onClickKind(e, kindid) {
+            this.$router.push(`/questkind/${kindid}`)
         }
     }
 }
@@ -93,7 +93,7 @@ export default {
             overflow: hidden;
             .kind {
                 width: 4.25rem;
-                margin: 0 1rem;
+                margin: 0 0.5rem;
                 max-height: 6.75rem;
                 overflow: hidden;
                 font-size: 0.625rem;

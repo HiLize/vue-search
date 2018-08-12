@@ -2,7 +2,7 @@
     <div class="layoutFlex">
         <div class="header">
             <Header :backIconClick="backIconClick">
-                <SearchBox slot="header" :inputFocus="inputFocus"/>
+                <SearchBox v-if="isShowSearch" slot="header" :inputFocus="inputFocus" :isFocus="isFocus"/>
             </Header>
         </div>
         <div class="content">
@@ -21,7 +21,16 @@ export default {
     components: { Icon, Button, Header, SearchBox },
     props: {
         backIconClick: Function,
-        inputFocus: Function
+        inputFocus: {
+            type: Function,
+            default: null
+        },
+        isShowSearch: {
+            default: true
+        },
+        isFocus: {
+            default: false
+        }
     }
 }
 </script>

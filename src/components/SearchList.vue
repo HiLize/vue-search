@@ -1,9 +1,7 @@
 <template>
-    <Layout :backIconClick="backIconClick" :inputFocus="inputFocus">
+    <Layout :backIconClick="backIconClick" :isFocus="true">
         <div slot="content">
-            <div class="scollTitle">燕大机器人</div>
-            <CardKind />
-            <div class="common">常见问题</div>
+            <div class="common">4个相关结果</div>
             <Card />
             <Card />
             <Card />
@@ -25,16 +23,12 @@ export default {
     methods: {
         clickCard() {
             console.log('click card')
-            this.$router.push('/questKind')
             getQest('wisedu').then(data => {
                 console.log(data, 'userSign return data')
             })
         },
         backIconClick() {
-            console.log('indexBack')
-        },
-        inputFocus() {
-            this.$router.push('/searchlist')
+            this.$router.push('/index')
         }
     }
 }

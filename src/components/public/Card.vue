@@ -1,6 +1,6 @@
 
 <template>
-    <div class="card">
+    <div class="card" @click="onClick">
         <div class="title">
             如何挂失<span>一卡通</span>
         </div>
@@ -15,7 +15,14 @@
 
 <script>
 export default {
-    
+    props: {
+        handleClick: Function
+    },
+    methods: {
+        onClick() {
+            this.$emit('handleClick')
+        }
+    }
 }
 </script>
 
@@ -49,7 +56,7 @@ export default {
         .text {
             width: 100%;
             height: 100%;
-            padding: 1.25rem 0;
+            margin: 1.25rem 0;
             font-size: 0.875rem;
             color: #78849E;
             overflow: hidden;

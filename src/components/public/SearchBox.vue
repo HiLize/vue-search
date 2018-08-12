@@ -1,6 +1,13 @@
 <template>
     <div class="searchFlex" :style="isFocus ? 'justify-content: space-between' : 'justify-content: flex-end'">
-        <input v-model="keyword" type="text" placeholder="搜索" :class="isFocus ? 'focusInput' : 'input'" @focus="inputFocus"/>
+        <input ref="input"
+            v-model="keyword"
+            type="text"
+            placeholder="搜索"
+            :class="isFocus ? 'focusInput' : 'input'"
+            @input="inputChange($event)"
+            @click.stop="inputFocus"
+        />
         <span v-if="isFocus">搜索</span>
     </div>
 </template>
@@ -11,7 +18,10 @@ export default {
         isFocus: {
             default: false
         },
-        inputFocus: Function
+        inputFocus: {
+            type: Function,
+            default: ''
+        }
     },
     data() {
         return {
@@ -22,6 +32,9 @@ export default {
         inputChange() {
             console.log('focus')
         }
+    },
+    mounted() {
+        this.isFocus ? this.$nextTick(() => {this.$refs['input'].focus()}) : ''
     }
 }
 </script>
@@ -38,6 +51,7 @@ export default {
         .mixininput(@width) {
             width: @width;
             height: 32px;
+            line-height: 32px;
             border: 1px solid #000000;
             border-radius: 55px;
             -webkit-tap-highlight-color:transparent;

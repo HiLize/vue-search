@@ -30,6 +30,7 @@ export default {
     width: 100%;
     line-height: 64px;
     padding: 0 1.5rem;
+    background-color: #ffffff;
     .headerFlex {
         display: flex;
         align-items: center;

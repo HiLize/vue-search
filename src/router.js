@@ -13,17 +13,22 @@ export default new Router({
         {
             path: '/index',
             meta: { title: '首页' },
-            component: resolve => require(['./components/IndexQuest'], resolve),
+            component: resolve => require(['./components/IndexQuest'], resolve)
         },
         {
-            path: '/questKind',
+            path: '/questkind/:kindid',
             meta: { title: '问题分类' },
-            component: resolve => require(['./components/QuestKind'], resolve),
+            component: resolve => require(['./components/QuestKind'], resolve)
         },
         {
             path: '/searchlist',
             meta: { title: '搜索列表'},
-            component: resolve => require(['./components/SearchList'], resolve),
+            component: resolve => require(['./components/SearchList'], resolve)
+        },
+        {
+            path: '/questdetail/:questid',
+            meta: { title: '搜索列表'},
+            component: resolve => require(['./components/QuestDetail'], resolve)
         }
     ]
 })
