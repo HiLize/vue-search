@@ -1,21 +1,67 @@
 
 <template>
     <div class="card">
-        <div class="title">
-            如何挂失<span>一卡通</span>
-        </div>
         <div class="text">
-            <p>
-                若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...
-                <span>查看更多</span>
-            </p> 
+            <div v-for="(info, i) in data" :key="i" v-if="i < 3" class="kind" @click="onClickKind($event, i)">
+                <div class="subTitle">{{info.title}}</div>
+                <p>
+                    {{info.info}}
+                </p>
+                <span>......</span>
+            </div>
+            <Divider v-for="(info, i) in data" v-if="i === 0"/>
+
+            <div v-for="(info, i) in data" :key="i" v-if="(3 <= i) && (i < 6)" class="kind" @click="onClickKind($event, i)">
+                <div class="subTitle">{{info.title}}</div>
+                <p>
+                    {{info.info}}
+                </p>
+                <span>......</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import {Divider} from 'iview'
+const data = [
+    {
+        title: '一卡通',
+        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
+    },
+    {
+        title: '一卡通',
+        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
+    },
+    {
+        title: '一卡通',
+        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
+    },
+    {
+        title: '一卡通',
+        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
+    },
+    {
+        title: '一卡通',
+        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
+    },
+    {
+        title: '一卡通',
+        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
+    }
+]
 export default {
-    
+    components: {Divider},
+    data() {
+        return {
+            data
+        }
+    },
+    methods: {
+        onClickKind(e, i) {
+            console.log('click kind', i)
+        }
+    }
 }
 </script>
 
@@ -23,7 +69,7 @@ export default {
 <style lang="less" scoped>
     .card {
         width: 100%;
-        height: 11.5625rem;
+        min-height: 11.5625rem;
         box-shadow: 0px 4px 16px rgba(69,91,99,0.1);
         background:rgba(255,255,255,1);
         border-radius:0.75rem;
@@ -34,30 +80,32 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        .title {
-            flex: none;
-            width: 100%;
-            height: 3.875rem;
-            line-height: 3.875rem;
-            font-size: 1rem;
-            color: #454F63;
-            border-bottom: 1px solid #F4F4F6;
-            span {
-                color: #52C7CA;
-            }
-        }
         .text {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
             height: 100%;
             padding: 1.25rem 0;
             font-size: 0.875rem;
             color: #78849E;
             overflow: hidden;
-            p {
-                height: 100%;
+            .kind {
+                width: 4.25rem;
+                margin: 0 1rem;
+                max-height: 6.75rem;
                 overflow: hidden;
-                span {
+                font-size: 0.625rem;
+                color: #78849E;
+                .subTitle {
                     color: #52C7CA;
+                    font-size: 1rem;
+                }
+                p {
+                    height: 2rem;
+                    line-height: 1rem;
+                    overflow: hidden;
                 }
             }
         }

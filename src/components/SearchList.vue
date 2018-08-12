@@ -34,7 +34,6 @@ export default {
             console.log('indexBack')
         },
         inputFocus() {
-            console.log('index search')
             this.$router.push('/searchlist')
         }
     }

@@ -19,6 +19,11 @@ export default new Router({
             path: '/questKind',
             meta: { title: '问题分类' },
             component: resolve => require(['./components/QuestKind'], resolve),
+        },
+        {
+            path: '/searchlist',
+            meta: { title: '搜索列表'},
+            component: resolve => require(['./components/SearchList'], resolve),
         }
     ]
 })

@@ -1,13 +1,21 @@
 <template>
     <div class="header">
         <div class="headerFlex">
-            <Icon class="backIcon" type="md-arrow-back"  size="24"/>
+            <Icon class="backIcon" type="md-arrow-back"  size="24" @click="backIconClick"/>
             <div class="right">
                 <slot name="header" ></slot>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        backIconClick: Function
+    }
+}
+</script>
 
 <style lang="less" scoped>
 .header {

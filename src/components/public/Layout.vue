@@ -1,7 +1,9 @@
 <template>
     <div class="layoutFlex">
         <div class="header">
-            <Header><SearchBox slot="header" /></Header>
+            <Header :backIconClick="backIconClick">
+                <SearchBox slot="header" :inputFocus="inputFocus"/>
+            </Header>
         </div>
         <div class="content">
             <slot name="content" />      
@@ -16,7 +18,11 @@ import SearchBox from './SearchBox.vue'
 
 
 export default {
-    components: { Icon, Button, Header, SearchBox }
+    components: { Icon, Button, Header, SearchBox },
+    props: {
+        backIconClick: Function,
+        inputFocus: Function
+    }
 }
 </script>
 

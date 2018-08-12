@@ -1,6 +1,6 @@
 <template>
     <div class="searchFlex" :style="isFocus ? 'justify-content: space-between' : 'justify-content: flex-end'">
-        <input v-model="keyword" type="text" placeholder="搜索" :class="isFocus ? 'focusInput' : 'input'" @input="inputChange($event)" @focus="inputChange($event)"/>
+        <input v-model="keyword" type="text" placeholder="搜索" :class="isFocus ? 'focusInput' : 'input'" @focus="inputFocus"/>
         <span v-if="isFocus">搜索</span>
     </div>
 </template>
@@ -10,7 +10,8 @@ export default {
     props: {
         isFocus: {
             default: false
-        }
+        },
+        inputFocus: Function
     },
     data() {
         return {
@@ -19,6 +20,7 @@ export default {
     },
     methods: {
         inputChange() {
+            console.log('focus')
         }
     }
 }
