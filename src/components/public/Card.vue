@@ -1,13 +1,9 @@
 
 <template>
     <div class="card">
-        <div class="title" @click="onClick">
-            如何挂失<span>一卡通</span>
-        </div>
+        <div class="title" @click="onClick" v-html="ruleTitle(item.name)"></div>
         <div class="text" ref="textDiv">
-            <p ref="textP">
-                若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助若校园卡丢失，自助服务终端上挂失自助若校园卡丢失, 自助服务终端上挂失自助若校园卡丢失
-            </p>
+            <p ref="textP" v-html="ruleTitle(item.info)"></p>
             <span class="more" v-if="isShowMore">...<span @click="onClick">查看更多</span></span>
         </div>
     </div>
@@ -16,7 +12,19 @@
 <script>
 export default {
     props: {
-        questId: String
+        questId: String,
+        searchValue: {
+            type: String,
+            default: '一卡通'
+        },
+        item: {
+            default: function() {
+                return {
+                    name: '如何挂失一卡通',
+                    info: '一卡通若校园卡丢失，请本人立刻按一卡通照以下途径之一进行挂失： 自助服务终端上挂失自助若校园卡丢失一卡通，自助服务终端上挂失自助若校园卡丢失, 自助服务终端上挂失自助若校园卡丢失'
+                }
+            }
+        }
     },
     data() {
         return {
@@ -36,6 +44,23 @@ export default {
             } else {
                 this.isShowMore = false
             }
+        },
+        // 匹配关键字高亮
+        ruleTitle(string) {
+            let titleString = string;
+            if (!titleString) {
+            return '';
+            }  
+
+            if (this.searchValue && this.searchValue.length > 0) {
+            // 匹配关键字正则
+            let replaceReg = new RegExp(this.searchValue, 'g');
+            // 高亮替换v-html值
+            let replaceString = '<span style="color: #52C7CA">' + this.searchValue + '</span>';
+            // 开始替换
+            titleString = titleString.replace(replaceReg, replaceString);
+            }
+            return titleString;
         }
     },
     mounted() {
@@ -70,9 +95,6 @@ export default {
             font-size: 1rem;
             color: #454F63;
             border-bottom: 1px solid #F4F4F6;
-            span {
-                color: #52C7CA;
-            }
         }
         .text {
             width: 100%;
