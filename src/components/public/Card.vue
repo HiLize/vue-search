@@ -16,11 +16,14 @@
 <script>
 export default {
     props: {
-        handleClick: Function
+        questId: String
     },
     methods: {
         onClick() {
-            this.$emit('handleClick')
+            // 打开新页面，使上一页留在浏览位置
+            let {href} = this.$router.resolve({path: `/questdetail/${this.questId}`});
+            window.open(href, '_blank');
+            // this.$router.push(`/questdetail/${this.questId}`)
         }
     }
 }

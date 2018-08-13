@@ -19,7 +19,8 @@ export default {
     components: { Layout },
     methods: {
         backIconClick() {
-            this.$router.go(-1)
+            window.close();
+            // this.$router.go(-1)
         }
     }
 }
@@ -34,7 +35,7 @@ export default {
     }
     p {
       font-size: 1rem;
-      color: #797e77;
+      color: #797E77;
       line-height: 1.75rem;
     }
 </style>

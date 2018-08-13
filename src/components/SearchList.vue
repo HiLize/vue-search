@@ -1,13 +1,13 @@
 <template>
-    <Layout :backIconClick="backIconClick" :isFocus="true">
-        <div slot="content" v-if="questList.length">
+    <Layout :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true">
+        <div slot="content" v-if="questList !== null && questList.length">
             <div class="common">4个相关结果</div>
             <Card />
             <Card />
             <Card />
             <Card />
         </div>
-        <div slot="content" class="emptyQuest" v-else>
+        <div slot="content" class="emptyQuest" v-else-if="questList !== null && questList.length === 0">
             太难了，我还没有收录这个问题
         </div>
     </Layout>
@@ -23,7 +23,7 @@ export default {
     components: { Layout, SearchBox, CardKind, Card },
     data() {
         return {
-            questList: [] 
+            questList: null
         }
     },
     methods: {

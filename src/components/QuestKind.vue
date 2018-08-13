@@ -4,11 +4,11 @@
             <div class="scollTitle">分类-生活</div>
             <div class="common">999个结果</div>
 
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <Card questId="1" />
+            <Card questId="2" />
+            <Card questId="3" />
+            <Card questId="4" />
+            <Card questId="5" />
         </div>
     </Layout>
 </template>
