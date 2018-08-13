@@ -18,12 +18,22 @@ import SearchBox from './public/SearchBox.vue'
 import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
 
+import {getCate} from '@/servers'
+
 export default {
     components: { Layout, SearchBox, CardKind, Card },
     methods: {
         backIconClick() {
             console.log('indexBack')
+        },
+        getKind() {
+            getCate('wisedu').then(data => {
+                console.log(data, 'userSign return data')
+            })
         }
+    },
+    mounted() {
+        this.getKind()
     }
 }
 </script>

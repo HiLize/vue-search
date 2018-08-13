@@ -2,7 +2,7 @@
     <div class="layoutFlex">
         <div class="header">
             <Header :backIconClick="backIconClick">
-                <SearchBox v-if="isShowSearch" slot="header" :isFocus="isFocus"/>
+                <SearchBox v-if="isShowSearch" slot="header" :isFocus="isFocus" @searchHandler="searchHandler"/>
             </Header>
         </div>
         <div class="content" ref="list">
@@ -26,6 +26,10 @@ export default {
         },
         isFocus: {
             default: false
+        },
+        searchHandler: {
+            default: () => {},
+            type: Function
         }
     }
 }

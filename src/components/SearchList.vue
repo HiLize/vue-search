@@ -1,5 +1,5 @@
 <template>
-    <Layout :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true">
+    <Layout :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
         <div slot="content" v-if="questList !== null && questList.length">
             <div class="common">4个相关结果</div>
             <Card />
@@ -19,6 +19,8 @@ import SearchBox from './public/SearchBox.vue'
 import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
 
+import {getQuestListByKind} from '@/servers'
+
 export default {
     components: { Layout, SearchBox, CardKind, Card },
     data() {
@@ -28,7 +30,17 @@ export default {
     },
     methods: {
         backIconClick() {
-            this.$router.push('/index')
+            this.$router.go(-1)
+        },
+        searchHandler(keyword) {
+            let params = {
+                question: keyword,
+                cate: '图书馆'
+            }
+            getQuestListByKind(params).then(data => {
+                console.log(data, 'search list')
+            })
+            console.log('search event', keyword)
         }
     }
 }

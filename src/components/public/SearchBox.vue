@@ -1,17 +1,17 @@
 <template>
     <div class="searchFlex" :style="isFocus ? 'justify-content: space-between' : 'justify-content: flex-end'">
-        <div :class="isFocus ? 'focusInputContainer' : 'inputContainer'" @click="goToSearchList">
+        <div v-if="isFocus" class="focusInputContainer">
             <div class="inputFlex">
                 <input ref="input"
                     v-model="keyword"
                     type="text"
                     placeholder="搜索"
                     class="input"
-                    @input="inputChange($event)"
+                    @input="searchEvent($event)"
                 />
-                <Icon v-if="!isFocus" type="ios-search" class="searchIcon" />
             </div>
         </div>
+        <Icon v-if="!isFocus" type="ios-search" class="searchIcon" @click="goToSearchList" />
         <div v-if="isFocus" class="searchButton">搜索</div>
     </div>
 </template>
@@ -31,8 +31,22 @@ export default {
         }
     },
     methods: {
-        inputChange(e) {
-            console.log('inputChange', e.target.value)
+        searchEvent() {
+            this.clearTimer();
+            if (this.keyword && this.keyword.length > 0) {
+                //获取当前延时函数的ID，便于后面clearTimeout清除该ID对应的延迟函数
+                this.timer = setTimeout(() => {
+                    console.log(this.keyword)
+                    this.$emit('searchHandler', this.keyword);
+                }, 500);
+            } else {
+                this.$emit('searchHandler', this.keyword);
+            }
+        },
+        clearTimer() {
+            if (this.timer) {
+                clearTimeout(this.timer);
+            }
         },
         goToSearchList() {
             this.isFocus ? '' : this.$router.push('/searchlist')
@@ -82,12 +96,10 @@ export default {
                 -webkit-tap-highlight-color:transparent;
                 outline: none;
             }
-            .searchIcon {
-                flex: none;
-                width: 1.25rem;
-                font-size: 1.25rem;
-                vertical-align: sub;
-            }
+  
+        }
+        .searchIcon {
+            font-size: 1.5rem;
         }
         .searchButton {
             flex: none;
