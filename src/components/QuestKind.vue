@@ -18,11 +18,21 @@ import Layout from './public/Layout.vue'
 import SearchBox from './public/SearchBox.vue'
 import Card from './public/Card.vue'
 
+import {getQest} from '@/servers/quest'
+
 export default {
     components: { Layout, SearchBox, Card, Card },
+    mounted() {
+        this.getListByKind()
+    },
     methods: {
         backIconClick() {
             this.$router.go(-1)
+        },
+        getListByKind() {
+            getQest('wisedu').then(data => {
+                console.log(data, 'userSign return data')
+            })
         }
     }
 }

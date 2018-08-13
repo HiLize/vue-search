@@ -18,18 +18,9 @@ import SearchBox from './public/SearchBox.vue'
 import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
 
-import {getQest} from '@/servers/quest'
-
 export default {
     components: { Layout, SearchBox, CardKind, Card },
     methods: {
-        clickCard() {
-            console.log('click card')
-            this.$router.push('/questKind')
-            getQest('wisedu').then(data => {
-                console.log(data, 'userSign return data')
-            })
-        },
         backIconClick() {
             console.log('indexBack')
         },

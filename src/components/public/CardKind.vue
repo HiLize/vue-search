@@ -9,7 +9,7 @@
                 </p>
                 <span>......</span>
             </div>
-            <Divider v-for="(info, i) in data" v-if="i === 0"/>
+            <Divider v-for="(info, i) in data" v-if="i === 0" :key="i + 'divider'"/>
 
             <div v-for="(info, i) in data" :key="i" v-if="(3 <= i) && (i < 6)" class="kind" @click="onClickKind($event, i)">
                 <div class="subTitle">{{info.title}}</div>
