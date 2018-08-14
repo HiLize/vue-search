@@ -1,9 +1,9 @@
 
 <template>
     <div class="card">
-        <div class="title" @click="onClick" v-html="ruleTitle(item.name)"></div>
+        <div class="title" @click="onClick" v-html="ruleTitle(item.question)"></div>
         <div class="text" ref="textDiv">
-            <p ref="textP" v-html="ruleTitle(item.info)"></p>
+            <p ref="textP" v-html="ruleTitle(item.answer)"></p>
             <span class="more" v-if="isShowMore">...<span @click="onClick">查看更多</span></span>
         </div>
     </div>
@@ -12,10 +12,9 @@
 <script>
 export default {
     props: {
-        questId: String,
-        searchValue: {
+        keyword: {
             type: String,
-            default: '一卡通'
+            default: ''
         },
         item: {
             default: function() {
@@ -34,7 +33,7 @@ export default {
     methods: {
         onClick() {
             // 打开新页面，使上一页留在浏览位置
-            let {href} = this.$router.resolve({path: `/questdetail/${this.questId}`});
+            let {href} = this.$router.resolve({path: `/questdetail/${this.item.cate}/${this.item.id}`});
             window.open(href, '_blank');
             // this.$router.push(`/questdetail/${this.questId}`)
         },
@@ -52,11 +51,11 @@ export default {
             return '';
             }  
 
-            if (this.searchValue && this.searchValue.length > 0) {
+            if (this.keyword && this.keyword.length > 0) {
             // 匹配关键字正则
-            let replaceReg = new RegExp(this.searchValue, 'g');
+            let replaceReg = new RegExp(this.keyword, 'g');
             // 高亮替换v-html值
-            let replaceString = '<span style="color: #52C7CA">' + this.searchValue + '</span>';
+            let replaceString = '<span style="color: #52C7CA">' + this.keyword + '</span>';
             // 开始替换
             titleString = titleString.replace(replaceReg, replaceString);
             }
@@ -92,6 +91,7 @@ export default {
             width: 100%;
             height: 3.875rem;
             line-height: 3.875rem;
+            overflow: hidden;
             font-size: 1rem;
             color: #454F63;
             border-bottom: 1px solid #F4F4F6;

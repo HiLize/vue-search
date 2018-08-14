@@ -21,17 +21,17 @@ export default new Router({
             component: IndexQuest
         },
         {
-            path: '/questkind/:kindid',
+            path: '/questkind/:cate',
             meta: { title: '问题分类', keepAlive: true },
             component: QuestKind
         },
         {
-            path: '/searchlist',
+            path: '/searchlist/:cate?',
             meta: { title: '搜索列表', keepAlive: true },
             component: SearchList
         },
         {
-            path: '/questdetail/:questid',
+            path: '/questdetail/:cate/:questid',
             meta: { title: '问题详情', keepAlive: true },
             component: QuestDetail
         }

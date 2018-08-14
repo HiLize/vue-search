@@ -2,10 +2,11 @@
  * A simple HTTP request module
  */
 import axios from 'axios'
+const URL = 'http://172.16.2.133:8871/question'
 
 // axios instance with default configurations
 const instance = axios.create({
-	baseURL: 'http://172.20.4.138:8871/question',
+	baseURL: URL,
 	withCredentials: true,
 	responseType: 'json'
 })

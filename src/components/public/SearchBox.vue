@@ -23,7 +23,8 @@ export default {
     props: {
         isFocus: {
             default: false
-        }
+        },
+        cate: String
     },
     data() {
         return {
@@ -36,9 +37,8 @@ export default {
             if (this.keyword && this.keyword.length > 0) {
                 //获取当前延时函数的ID，便于后面clearTimeout清除该ID对应的延迟函数
                 this.timer = setTimeout(() => {
-                    console.log(this.keyword)
                     this.$emit('searchHandler', this.keyword);
-                }, 500);
+                }, 300);
             } else {
                 this.$emit('searchHandler', this.keyword);
             }
@@ -49,7 +49,7 @@ export default {
             }
         },
         goToSearchList() {
-            this.isFocus ? '' : this.$router.push('/searchlist')
+            this.isFocus ? '' : this.$router.push(`/searchlist/${this.cate}`)
         }
     },
     mounted() {

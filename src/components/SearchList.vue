@@ -1,11 +1,8 @@
 <template>
     <Layout :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
         <div slot="content" v-if="questList !== null && questList.length">
-            <div class="common">4个相关结果</div>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <div class="common">{{questList.length}}个相关结果</div>
+            <Card v-for="(info, i) in questList" :key="i" :item="info" :keyword="keyword"/>
         </div>
         <div slot="content" class="emptyQuest" v-else-if="questList !== null && questList.length === 0">
             太难了，我还没有收录这个问题
@@ -19,13 +16,14 @@ import SearchBox from './public/SearchBox.vue'
 import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
 
-import {getQuestListByKind} from '@/servers'
+import {getQuestList} from '@/servers'
 
 export default {
     components: { Layout, SearchBox, CardKind, Card },
     data() {
         return {
-            questList: null
+            questList: null,
+            keyword: ''
         }
     },
     methods: {
@@ -33,14 +31,16 @@ export default {
             this.$router.go(-1)
         },
         searchHandler(keyword) {
+            this.keyword = keyword
             let params = {
-                question: keyword,
-                cate: '图书馆'
+                question: keyword
             }
-            getQuestListByKind(params).then(data => {
-                console.log(data, 'search list')
+            if (this.$route.params.cate !== '') {
+                params.cate = this.$route.params.cate
+            }
+            getQuestList(params).then(data => {
+                this.questList = data
             })
-            console.log('search event', keyword)
         }
     }
 }

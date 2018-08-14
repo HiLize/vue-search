@@ -2,12 +2,9 @@
     <Layout :backIconClick="backIconClick">
         <div slot="content">
             <div class="scollTitle">燕大机器人</div>
-            <CardKind />
+            <CardKind :data="cate"  v-if="cate.length" :questList="list"/>
             <div class="common">常见问题</div>
-            <Card questId="11" />
-            <Card questId="12" />
-            <Card questId="13" />
-            <Card questId="14" />
+            <Card v-for="(info, i) in list" :key="i" :item="info"/>
         </div>
     </Layout>
 </template>
@@ -18,22 +15,34 @@ import SearchBox from './public/SearchBox.vue'
 import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
 
-import {getCate} from '@/servers'
+import {getCate, getQuestList} from '@/servers'
 
 export default {
     components: { Layout, SearchBox, CardKind, Card },
+    data() {
+        return {
+            cate: [],
+            list: []
+        }
+    },
     methods: {
         backIconClick() {
             console.log('indexBack')
         },
         getKind() {
             getCate('wisedu').then(data => {
-                console.log(data, 'userSign return data')
+                this.cate = data
+            })
+        },
+        getQuestList() {
+            getQuestList().then(data => {
+                this.list = data
             })
         }
     },
     mounted() {
         this.getKind()
+        this.getQuestList()
     }
 }
 </script>

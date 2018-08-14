@@ -5,12 +5,12 @@
             <!-- 行 -->
             <div class="rowText" v-for="(data, index) in dataArr" :key="'row' + index">
                 <!-- 列 -->
-                <div v-for="(info, i) in data" :key="'column' + i" class="kind" @click="onClickKind($event, `${index}${i}`)">
-                    <div class="subTitle">{{info.title}}</div>
+                <div v-for="(info, i) in data" :key="'column' + i" class="kind" @click="onClickKind($event, info)">
+                    <div class="subTitle">{{info}}</div>
                     <p>
-                        {{info.info}}
+                        <span v-for="(quest, index) in questList" :key="index + info" v-if="quest.cate === info">{{quest.question}}</span>
                     </p>
-                    <span v-if="info.info">......</span>
+                    <span v-if="info">......</span>
                 </div>
                 <!-- 最后一行不现实分割线 -->
                 <Divider v-if="index < (dataArr.length - 1)" :key="index + 'divider'"/>
@@ -21,34 +21,17 @@
 
 <script>
 import {Divider} from 'iview'
-const data = [
-    {
-        title: '一卡通',
-        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
-    },
-    {
-        title: '一卡通',
-        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
-    },
-    {
-        title: '一卡通',
-        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
-    },
-    {
-        title: '一卡通',
-        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
-    },
-    {
-        title: '一卡通',
-        info: '若校园卡丢失，请本人立刻按照以下途径之一进行挂失： 自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失自助服务终端上挂失：在校园内自助服务终端上（自助服务）按照提示进行挂失操作...'
-    }
-]
+
 export default {
     components: {Divider},
+    props: {
+        data: Array,
+        questList: Array
+    },
     data() {
         return {
-            data: data,
-            dataArr: []
+            dataArr: [],
+            count: 0
         }
     },
     methods: {
@@ -60,11 +43,12 @@ export default {
              for(var i = 0,len = this.data.length; i < len; i += 3){
                 this.dataArr.push(this.data.slice(i,i+3));
             }
+            let lastIndex = this.dataArr.length - 1
             // 最后一行不足3列的，填满3列占位（因为flex-item使用的均分大小）
-            if(this.dataArr.length / 3 !== 0) {
-                let length = 3 - (this.dataArr.length % 3)
+            if(this.dataArr[lastIndex].length / 3 !== 0) {
+                let length = 3 - this.dataArr[lastIndex].length
                 for (let i = 0; i < length; i++) {
-                    this.dataArr[this.dataArr.length - 1].push({}) 
+                    this.dataArr[lastIndex].push({}) 
                 }
             }
         }
@@ -119,6 +103,10 @@ export default {
                         height: 2rem;
                         line-height: 1rem;
                         overflow: hidden;
+                        span {
+                            display: inline-block;
+                            width: 100%;
+                        }
                     }
                 }
             }

@@ -1,14 +1,10 @@
 <template>
-    <Layout :backIconClick="backIconClick">
+    <Layout :backIconClick="backIconClick" :searchCate="this.$route.params.cate">
         <div slot="content">
-            <div class="scollTitle">分类-生活</div>
-            <div class="common">999个结果</div>
+            <div class="scollTitle">分类-{{$route.params.cate}}</div>
+            <div class="common">{{cateList.length}}个结果</div>
 
-            <Card questId="1" />
-            <Card questId="2" />
-            <Card questId="3" />
-            <Card questId="4" />
-            <Card questId="5" />
+            <Card v-for="(info, i) in cateList" :key="i + 'kindlist'" :item="info" />
         </div>
     </Layout>
 </template>
@@ -18,13 +14,30 @@ import Layout from './public/Layout.vue'
 import SearchBox from './public/SearchBox.vue'
 import Card from './public/Card.vue'
 
+import {getQuestList} from '@/servers'
 
 export default {
     components: { Layout, SearchBox, Card, Card },
+    data() {
+        return {
+            cateList: Object
+        }
+    },
     methods: {
         backIconClick() {
             this.$router.go(-1)
+        },
+        getListByCate() {
+            let params = {
+                cate: this.$route.params.cate
+            }
+            getQuestList(params).then(data => {
+                this.cateList = data
+            })
         }
+    },
+    mounted() {
+        this.getListByCate()
     }
 }
 </script>

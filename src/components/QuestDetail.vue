@@ -1,27 +1,36 @@
 <template>
     <Layout :backIconClick="backIconClick" :isShowSearch="false">
         <div slot="content">
-            <div class="common">网络及电脑需求网络及电脑需求网络及电脑需求网络及电脑需求网络及电脑需求</div>
-            <p>
-              对于大一是否携带电脑没有统一规定，看导员的要求。网络分为校园网 个人网 集体网三类。校园网与集体网共用同一个网络接口，个人网为另一个网络接口。各宿舍自行购置路由器，分线器及网线连接即可。连接校园网时，电脑/手机会自动弹出实名认证窗口，账号为校园卡卡号，密码默认为学生身份证号后六位，每个账号每月有6G免费流量，登录部分学校网站不计流量。
-              对于大一是否携带电脑没有统一规定，看导员的要求。网络分为校园网 个人网 集体网三类。校园网与集体网共用同一个网络接口，个人网为另一个网络接口。各宿舍自行购置路由器，分线器及网线连接即可。连接校园网时，电脑/手机会自动弹出实名认证窗口，账号为校园卡卡号，密码默认为学生身份证号后六位，每个账号每月有6G免费流量，登录部分学校网站不计流量。
-              对于大一是否携带电脑没有统一规定，看导员的要求。网络分为校园网 个人网 集体网三类。校园网与集体网共用同一个网络接口，个人网为另一个网络接口。各宿舍自行购置路由器，分线器及网线连接即可。连接校园网时，电脑/手机会自动弹出实名认证窗口，账号为校园卡卡号，密码默认为学生身份证号后六位，每个账号每月有6G免费流量，登录部分学校网站不计流量。
-              对于大一是否携带电脑没有统一规定，看导员的要求。网络分为校园网 个人网 集体网三类。校园网与集体网共用同一个网络接口，个人网为另一个网络接口。各宿舍自行购置路由器，分线器及网线连接即可。连接校园网时，电脑/手机会自动弹出实名认证窗口，账号为校园卡卡号，密码默认为学生身份证号后六位，每个账号每月有6G免费流量，登录部分学校网站不计流量。 jieshu
-            </p>
+            <div class="common">{{detail.question}}</div>
+            <p>{{detail.answer}}</p>
         </div>
     </Layout>
 </template>
 
 <script>
 import Layout from './public/Layout.vue'
+import {getQuestInfo} from '@/servers'
 
 export default {
     components: { Layout },
+    data() {
+        return {
+            detail: Object
+        }
+    },
     methods: {
         backIconClick() {
             window.close();
             // this.$router.go(-1)
+        },
+        getInfo() {
+            getQuestInfo(this.$route.params.questid).then(data => {
+                this.detail = data
+            })
         }
+    },
+    mounted() {
+        this.getInfo()
     }
 }
 </script>

@@ -2,7 +2,7 @@
     <div class="layoutFlex">
         <div class="header">
             <Header :backIconClick="backIconClick">
-                <SearchBox v-if="isShowSearch" slot="header" :isFocus="isFocus" @searchHandler="searchHandler"/>
+                <SearchBox v-if="isShowSearch" slot="header" :isFocus="isFocus" @searchHandler="searchHandler" :cate="searchCate"/>
             </Header>
         </div>
         <div class="content" ref="list">
@@ -30,6 +30,10 @@ export default {
         searchHandler: {
             default: () => {},
             type: Function
+        },
+        searchCate: {
+            type: String,
+            default: ''
         }
     }
 }
