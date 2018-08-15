@@ -10,7 +10,9 @@
 </template>
 
 <script>
+import { Icon } from 'iview'
 export default {
+    components: { Icon },
     props: {
         backIconClick: Function
     }

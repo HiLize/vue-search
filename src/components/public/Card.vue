@@ -109,8 +109,8 @@ export default {
                 bottom: 0;
                 right: 0;
                 padding-left: 5rem;
-                // 透明渐变
-                background: linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 1) 55%);
+                // 透明渐变 to left要加to不然less会警告
+                background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 1) 55%);
                 span {
                     color: #52C7CA;
                 }

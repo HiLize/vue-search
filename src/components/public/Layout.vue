@@ -16,7 +16,6 @@ import { Icon, Button } from 'iview'
 import Header from './Header.vue'
 import SearchBox from './SearchBox.vue'
 
-
 export default {
     components: { Icon, Button, Header, SearchBox },
     props: {
