@@ -16,7 +16,6 @@ import SearchBox from './public/SearchBox.vue'
 import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
 import Loading from './public/Loading.vue'
-import { Icon } from 'iview'
 
 import {getCate, getQuestList} from '@/servers'
 
@@ -30,7 +29,7 @@ export default {
     },
     methods: {
         backIconClick() {
-            console.log('indexBack')
+            // console.log('indexBack')
         },
         getKind() {
             getCate('wisedu').then(data => {
@@ -44,7 +43,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$route, window.location.href)
         this.getKind()
         this.getQuestList()
     }

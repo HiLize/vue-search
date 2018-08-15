@@ -8,6 +8,7 @@ import QuestDetail from './components/QuestDetail'
 
 Vue.use(Router)
 
+// console.log(window.location.href, 'router')
 export default new Router({
     mode: 'history',
     routes: [
