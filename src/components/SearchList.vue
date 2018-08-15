@@ -2,12 +2,12 @@
     <Layout :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
         <!-- <Loading slot="content" v-if="isLoading" /> -->
 
-        <div slot="content" v-if="questList.length">
+        <div slot="content" v-if="questList !== null && questList.length">
             <div class="common">{{questList.length}}个相关结果</div>
             <Card v-for="(info, i) in questList" :key="i" :item="info" :keyword="keyword"/>
         </div>
 
-        <Empty slot="content" v-else>
+        <Empty slot="content" v-else-if="questList !== null && questList.length === 0">
             太难了，我还没有收录这个问题
         </Empty>
     </Layout>
@@ -28,7 +28,7 @@ export default {
     data() {
         return {
             isLoading: false,
-            questList: [],
+            questList: null,
             keyword: ''
         }
     },
