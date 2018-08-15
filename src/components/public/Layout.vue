@@ -50,6 +50,7 @@ export default {
             height: 64px;
         }
         .content {
+            position: relative;
             height: 100%;
             width: 100%;
             overflow: auto;

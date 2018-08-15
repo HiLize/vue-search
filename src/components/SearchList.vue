@@ -1,12 +1,15 @@
 <template>
     <Layout :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
-        <div slot="content" v-if="questList !== null && questList.length">
+        <!-- <Loading slot="content" v-if="isLoading" /> -->
+
+        <div slot="content" v-if="questList.length">
             <div class="common">{{questList.length}}个相关结果</div>
             <Card v-for="(info, i) in questList" :key="i" :item="info" :keyword="keyword"/>
         </div>
-        <div slot="content" class="emptyQuest" v-else-if="questList !== null && questList.length === 0">
+
+        <Empty slot="content" v-else>
             太难了，我还没有收录这个问题
-        </div>
+        </Empty>
     </Layout>
 </template>
 
@@ -15,14 +18,17 @@ import Layout from './public/Layout.vue'
 import SearchBox from './public/SearchBox.vue'
 import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
+import Loading from './public/Loading.vue'
+import Empty from './public/Empty.vue'
 
 import {getQuestList} from '@/servers'
 
 export default {
-    components: { Layout, SearchBox, CardKind, Card },
+    components: { Layout, SearchBox, CardKind, Card, Loading, Empty },
     data() {
         return {
-            questList: null,
+            isLoading: false,
+            questList: [],
             keyword: ''
         }
     },
@@ -31,6 +37,7 @@ export default {
             this.$router.go(-1)
         },
         searchHandler(keyword) {
+            this.isLoading = true
             this.keyword = keyword
             let params = {
                 question: keyword
@@ -40,6 +47,7 @@ export default {
             }
             getQuestList(params).then(data => {
                 this.questList = data
+                this.isLoading = false
             })
         }
     }
@@ -54,15 +62,5 @@ export default {
     .common {
         color: #797E77;
         font-size: 1rem;
-    }
-    .emptyQuest {
-        width: 100%;
-        height: 9.25rem;
-        line-height: 9.25rem;
-        text-align: center;
-        background-color: #F1F9FF;
-        border-radius: 0.625rem;
-        color: #797E77;
-        font-size: 0.875rem;
     }
 </style>

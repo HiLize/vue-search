@@ -7,12 +7,12 @@
                     type="text"
                     placeholder="搜索"
                     class="input"
-                    @input="searchEvent($event)"
+                    @input="searchEvent($event, 'input')"
                 />
             </div>
         </div>
         <Icon v-if="!isFocus" type="ios-search" class="searchIcon" @click="goToSearchList" />
-        <div v-if="isFocus" class="searchButton">搜索</div>
+        <div v-if="isFocus" class="searchButton" @click="searchEvent($event, 'button')">搜索</div>
     </div>
 </template>
 
@@ -20,6 +20,7 @@
 import { Icon } from 'iview'
 
 export default {
+    components: {Icon},
     props: {
         isFocus: {
             default: false
@@ -32,7 +33,7 @@ export default {
         }
     },
     methods: {
-        searchEvent() {
+        searchEvent(e, type) {
             this.clearTimer();
             if (this.keyword && this.keyword.length > 0) {
                 //获取当前延时函数的ID，便于后面clearTimeout清除该ID对应的延迟函数
