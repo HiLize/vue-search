@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// 该种方法会全部加载页面，造成页面展示变慢，使用底下的懒加载方法
 // import IndexQuest from './components/IndexQuest'
 // import QuestKind from './components/QuestKind'
 // import SearchList from './components/SearchList'
