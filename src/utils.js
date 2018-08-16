@@ -1,3 +1,4 @@
+// 正则获取地址栏参数
 export const GetQueryString = (name) => {
     // console.log(name, window.location.search, window.location.href)
      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
