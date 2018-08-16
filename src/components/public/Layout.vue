@@ -33,7 +33,14 @@ export default {
         searchCate: {
             type: String,
             default: ''
+        },
+        scrollTop: {
+            type: Number,
+            default: 0
         }
+    },
+    mounted() {
+        this.$refs.list.scrollTop = this.scrollTop
     }
 }
 </script>

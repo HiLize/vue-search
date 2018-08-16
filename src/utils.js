@@ -1,7 +1,18 @@
 // 正则获取地址栏参数
 export const GetQueryString = (name) => {
-    // console.log(name, window.location.search, window.location.href)
-     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-     var r = window.location.search.substr(1).match(reg);
-     if(r!=null)return  unescape(r[2]); return null;
+    var after = window.location.hash.split("?")[1];
+    if(after){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = after.match(reg);
+        if(r != null)
+        {
+            return  decodeURIComponent(r[2]);
+        }
+        else
+        {
+            return null;
+        }
+    } else {
+        return null
+    }
 }

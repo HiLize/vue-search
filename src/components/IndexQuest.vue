@@ -1,6 +1,6 @@
 <template>
-    <Layout :backIconClick="backIconClick">
-        <div slot="content" v-if="cate !== null && cate.length > 0">
+    <Layout v-show="!isShowDetail" :backIconClick="backIconClick">
+        <div class="container" ref="list" slot="content" v-if="cate !== null && cate.length > 0">
             <div class="scollTitle">燕大机器人</div>
             <CardKind :data="cate" :questList="list"/>
             <div class="common">常见问题</div>
@@ -17,7 +17,6 @@ import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
 import Loading from './public/Loading.vue'
 
-import {GetQueryString} from '@/utils'
 import {getCate, getQuestList} from '@/servers'
 
 export default {
@@ -25,7 +24,8 @@ export default {
     data() {
         return {
             cate: null,
-            list: null
+            list: null,
+            isShowDetail: false
         }
     },
     methods: {
@@ -33,14 +33,12 @@ export default {
             // console.log('indexBack')
         },
         getKind() {
-            let tenantId = GetQueryString('tenantId')
-            getCate({tenantId: tenantId === null ? 'wisedu' : tenantId}).then(data => {
+            getCate().then(data => {
                 this.cate = data
             })
         },
         getQuestList() {
-            let tenantId = GetQueryString('tenantId')
-            getQuestList({tenantId: tenantId === null ? 'wisedu' : tenantId}).then(data => {
+            getQuestList().then(data => {
                 this.list = data
             })
         }
@@ -61,4 +59,10 @@ export default {
         color: #797E77;
         font-size: 1rem;
     }
+    // .container {
+    //     height: 100%;
+    //     width: 100%;
+    //     overflow: auto;
+    //     padding: 1rem;
+    // }
 </style>

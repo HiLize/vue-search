@@ -48,7 +48,7 @@ export default {
             if(this.dataArr[lastIndex].length / 3 !== 0) {
                 let length = 3 - this.dataArr[lastIndex].length
                 for (let i = 0; i < length; i++) {
-                    this.dataArr[lastIndex].push({}) 
+                    this.dataArr[lastIndex].push(null) 
                 }
             }
         }

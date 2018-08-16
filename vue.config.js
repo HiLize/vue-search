@@ -1,10 +1,19 @@
 module.exports = {
-    baseUrl: process.env.NODE_ENV === 'production' ? '/' : '/',
+    baseUrl: process.env.NODE_ENV === 'production' ? './' : '/',
     // 将部署应用程序的基本URL
     // 将部署应用程序的基本URL。
     // 默认情况下，Vue CLI假设您的应用程序将部署在域的根目录下。
     // https://www.my-app.com/。如果应用程序部署在子路径上，则需要使用此选项指定子路径。例如，如果您的应用程序部署在https://www.foobar.com/my-app/，集baseUrl到'/my-app/'.
-
+    css: {
+        // 是否使用css分离插件 ExtractTextPlugin
+        extract: process.env.NODE_ENV === 'production',
+        // 开启 CSS source maps?
+        sourceMap: false,
+        // css预设器配置项
+        loaderOptions: {},
+        // 启用 CSS modules for all css / pre-processor files.
+        modules: false
+    },
     configureWebpack: {
         resolve: {
             alias: {

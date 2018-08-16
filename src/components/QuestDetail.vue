@@ -10,7 +10,6 @@
 <script>
 import Layout from './public/Layout.vue'
 import {getQuestInfo} from '@/servers'
-import {GetQueryString} from '@/utils'
 
 export default {
     components: { Layout },
@@ -21,14 +20,14 @@ export default {
     },
     methods: {
         backIconClick() {
-            window.close();
-            // this.$router.go(-1)
+            // window.close();
+            // window.open("about:blank","_self").close() 
+            // window.open("", "_self"),close()
+            this.$router.go(-1)
         },
         getInfo() {
-            let tenantId = GetQueryString('tenantId')
             let params = {
-                id: this.$route.params.questid,
-                tenantId: tenantId === null ? 'wisedu' : tenantId
+                id: this.$route.params.questid
             }
             getQuestInfo(params).then(data => {
                 this.detail = data

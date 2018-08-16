@@ -1,7 +1,7 @@
 
 <template>
-    <div class="card">
-        <div class="title" @click="onClick" v-html="ruleTitle(item.question)"></div>
+    <div class="card" @click="onClick" >
+        <div class="title" v-html="ruleTitle(item.question)"></div>
         <div class="text" ref="textDiv">
             <p ref="textP" v-html="ruleTitle(item.answer)"></p>
             <span class="more" v-if="isShowMore">...<span @click="onClick">查看更多</span></span>
@@ -32,10 +32,11 @@ export default {
     },
     methods: {
         onClick() {
+            // this.$emit('handleClick', this.item)
             // 打开新页面，使上一页留在浏览位置
-            let {href} = this.$router.resolve({path: `/questdetail/${this.item.cate}/${this.item.id}`});
-            window.open(href, '_blank');
-            // this.$router.push(`/questdetail/${this.questId}`)
+            // let {href} = this.$router.resolve({path: `/questdetail/${this.item.cate}/${this.item.id}`});
+            // window.open(href, '_blank');
+            this.$router.push(`/questdetail/${this.item.cate}/${this.item.id}`)
         },
         showMore() {
             if (this.$refs.textP.clientHeight > this.$refs.textDiv.clientHeight) {

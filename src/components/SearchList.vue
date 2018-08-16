@@ -22,7 +22,6 @@ import Loading from './public/Loading.vue'
 import Empty from './public/Empty.vue'
 
 import {getQuestList} from '@/servers'
-import {GetQueryString} from '@/utils'
 
 export default {
     components: { Layout, SearchBox, CardKind, Card, Loading, Empty },
@@ -40,10 +39,8 @@ export default {
         searchHandler(keyword) {
             this.isLoading = true
             this.keyword = keyword
-            let tenantId = GetQueryString('tenantId')
             let params = {
-                question: keyword,
-                tenantId: tenantId === null ? 'wisedu' : tenantId
+                question: keyword
             }
             if (this.$route.params.cate !== '') {
                 params.cate = this.$route.params.cate
