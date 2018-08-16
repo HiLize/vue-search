@@ -5,7 +5,7 @@
                 <SearchBox v-if="isShowSearch" slot="header" :isFocus="isFocus" @searchHandler="searchHandler" :cate="searchCate"/>
             </Header>
         </div>
-        <div class="content" ref="list">
+        <div class="content" ref="list" id="list">
             <slot name="content" />      
         </div>
     </div>

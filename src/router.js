@@ -32,8 +32,8 @@ export default new Router({
             component: resolve => require(['./components/SearchList'], resolve)
         },
         {
-            path: '/questdetail/:cate/:questid',
-            meta: { title: '问题详情', keepAlive: true },
+            path: '/questdetail/:cate/:questid/:keyword?',
+            meta: { title: '问题详情' },
             component: resolve => require(['./components/QuestDetail'], resolve)
         }
     ]

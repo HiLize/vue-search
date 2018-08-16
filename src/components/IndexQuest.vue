@@ -46,7 +46,10 @@ export default {
     mounted() {
         this.getKind()
         this.getQuestList()
-    }
+    },
+    // beforeRouteLeave(to, from, next) {
+    //     console.log(to, from, next, document.getElementById('list').scrollTop)
+    // }
 }
 </script>
 

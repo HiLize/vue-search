@@ -2,7 +2,7 @@
     <Layout :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
         <!-- <Loading slot="content" v-if="isLoading" /> -->
 
-        <div slot="content" v-if="questList !== null && questList.length">
+        <div slot="content" ref="content" v-if="questList !== null && questList.length">
             <div class="common">{{questList.length}}个相关结果</div>
             <Card v-for="(info, i) in questList" :key="i" :item="info" :keyword="keyword"/>
         </div>
@@ -34,9 +34,11 @@ export default {
     },
     methods: {
         backIconClick() {
+            sessionStorage.removeItem('keyword')
             this.$router.go(-1)
         },
         searchHandler(keyword) {
+            sessionStorage.setItem('keyword', keyword)
             this.isLoading = true
             this.keyword = keyword
             let params = {
@@ -50,6 +52,12 @@ export default {
                 this.isLoading = false
             })
         }
+    },
+    mounted() {
+        let key = sessionStorage.getItem('keyword')
+        if (key !== null && typeof key !== 'undefined'){
+            this.searchHandler(key)
+        } 
     }
 }
 </script>
