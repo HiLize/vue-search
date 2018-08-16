@@ -2,18 +2,18 @@ import {get} from '@/http'
 
 // 获取分类列表
 export const getCate = params => {
-    return get(`/cate/list?tenantId=${params}`)
+    return get('/cate/list?tenantId=' + params.tenantId)
 }
 
 // 获取分类问题列表
 export const getQuestList = params => {
-    let url = 'list?tenantId=wisedu'
+    let url = 'list?tenantId=' + params.tenantId
     if (typeof params !== 'undefined') {
         if (typeof params.question !== 'undefined' && params.question !== null) {
-            url += `&question=${params.question}`
+            url += '&question=' + params.question
         }
         if (typeof params.cate !== 'undefined' && params.cate !== null) {
-            url += `&cate=${params.cate}`
+            url += '&cate=' + params.cate
         }
     }
     return get(url)
@@ -21,7 +21,7 @@ export const getQuestList = params => {
 
 // 获取具体问题详情
 export const getQuestInfo = params => {
-    return get(`get?id=${params}`)
+    return get('get?tenantId=' + params.tenantId + '&id=' + params.id)
 } 
 
 // 常见问题分类

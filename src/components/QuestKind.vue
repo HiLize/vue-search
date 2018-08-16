@@ -23,6 +23,7 @@ import Loading from './public/Loading.vue'
 import Empty from './public/Empty.vue'
 
 import {getQuestList} from '@/servers'
+import {GetQueryString} from '@/utils'
 
 export default {
     components: { Layout, SearchBox, Card, Loading, Empty },
@@ -36,8 +37,10 @@ export default {
             this.$router.go(-1)
         },
         getListByCate() {
+            let tenantId = GetQueryString('tenantId')
             let params = {
-                cate: this.$route.params.cate
+                cate: this.$route.params.cate,
+                tenantId: tenantId === null ? 'wisedu' : tenantId
             }
             getQuestList(params).then(data => {
                 this.cateList = data

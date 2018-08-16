@@ -9,7 +9,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-// console.log(window.location.href, 'router')
 export default new Router({
     mode: 'history',
     routes: [

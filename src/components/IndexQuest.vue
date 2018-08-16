@@ -17,6 +17,7 @@ import CardKind from './public/CardKind.vue'
 import Card from './public/Card.vue'
 import Loading from './public/Loading.vue'
 
+import {GetQueryString} from '@/utils'
 import {getCate, getQuestList} from '@/servers'
 
 export default {
@@ -32,12 +33,14 @@ export default {
             // console.log('indexBack')
         },
         getKind() {
-            getCate('wisedu').then(data => {
+            let tenantId = GetQueryString('tenantId')
+            getCate({tenantId: tenantId === null ? 'wisedu' : tenantId}).then(data => {
                 this.cate = data
             })
         },
         getQuestList() {
-            getQuestList().then(data => {
+            let tenantId = GetQueryString('tenantId')
+            getQuestList({tenantId: tenantId === null ? 'wisedu' : tenantId}).then(data => {
                 this.list = data
             })
         }
