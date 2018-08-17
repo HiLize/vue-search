@@ -6,7 +6,7 @@
             <div class="common">常见问题</div>
             <Card v-for="(info, i) in list" :key="i" :item="info"/>
         </div>
-        <!-- <Loading slot="content" v-else /> -->
+        <Loading slot="content" v-else />
     </Layout>
 </template>
 
@@ -47,15 +47,27 @@ export default {
         this.getKind()
         this.getQuestList()
     },
+    // deactivated() {
+    //     console.log('123')
+    //     let path = this.$route.path
+    //     this.$nextTick(function(){
+    //         let position =sessionStorage.getItem(path) //返回页面取出来
+    //         document.getElementById('list').scrollTop = position
+    //     })
+    // },
     // beforeRouteLeave(to, from, next) {
-    //     console.log(to, from, next, document.getElementById('list').scrollTop)
+    //     let fromRoute = from.path
+    //     let position = document.getElementById('list').scrollTop
+    //     sessionStorage.setItem(fromRoute, position)
+    //     // from.meta.keepAlive = false
+    //     next() // 一定要加next，否则不会跳转
     // }
 }
-</script>
+</script> 
 
 <style lang="less" scoped>
     .scollTitle {
-        color: #454F63;
+        color: #454F63; 
         font-size: 1.75rem;
     }
     .common {

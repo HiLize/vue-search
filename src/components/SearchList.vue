@@ -24,6 +24,7 @@ import Empty from './public/Empty.vue'
 import {getQuestList} from '@/servers'
 
 export default {
+    name: 'searchlist',
     components: { Layout, SearchBox, CardKind, Card, Loading, Empty },
     data() {
         return {
@@ -38,7 +39,7 @@ export default {
             this.$router.go(-1)
         },
         searchHandler(keyword) {
-            sessionStorage.setItem('keyword', keyword)
+            // sessionStorage.setItem('keyword', keyword)
             this.isLoading = true
             this.keyword = keyword
             let params = {
@@ -52,12 +53,6 @@ export default {
                 this.isLoading = false
             })
         }
-    },
-    mounted() {
-        let key = sessionStorage.getItem('keyword')
-        if (key !== null && typeof key !== 'undefined'){
-            this.searchHandler(key)
-        } 
     }
 }
 </script>

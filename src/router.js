@@ -18,17 +18,17 @@ export default new Router({
         },
         {
             path: '/index',
-            meta: { title: '首页', keepAlive: true },
+            meta: { title: '首页' },
             component: resolve => require(['./components/IndexQuest'], resolve)
         },
         {
             path: '/questkind/:cate',
-            meta: { title: '问题分类', keepAlive: true },
+            meta: { title: '问题分类' },
             component: resolve => require(['./components/QuestKind'], resolve)
         },
         {
             path: '/searchlist/:cate?',
-            meta: { title: '搜索列表', keepAlive: true },
+            meta: { title: '搜索列表' },
             component: resolve => require(['./components/SearchList'], resolve)
         },
         {

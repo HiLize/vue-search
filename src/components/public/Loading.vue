@@ -1,5 +1,5 @@
 <template>
-    <Spin slot="content" fix>
+    <Spin slot="content" fix size="small">
         <Icon type="ios-loading" size=18 class="demo-spin-icon-load" style="color: #52C7CA"></Icon>
         <div style="color: #52C7CA">Loading</div>
     </Spin>

@@ -21,6 +21,7 @@ export default {
     methods: {
         backIconClick() {
             // window.close();
+            // history.back()
             // window.open("about:blank","_self").close() 
             // window.open("", "_self"),close()
             this.$router.go(-1)
