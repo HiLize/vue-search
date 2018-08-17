@@ -1,5 +1,5 @@
 <template>
-    <Layout :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
+    <Layout v-if="hackReset" :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
         <!-- <Loading slot="content" v-if="isLoading" /> -->
 
         <div slot="content" ref="content" v-if="questList !== null && questList.length">
@@ -30,7 +30,8 @@ export default {
         return {
             isLoading: false,
             questList: null,
-            keyword: ''
+            keyword: '',
+            hackReset: true
         }
     },
     methods: {
@@ -53,6 +54,23 @@ export default {
                 this.isLoading = false
             })
         }
+    },
+    activated() {
+        console.log('activated')
+        this.hackReset = false
+        this.$nextTick(() => {
+            this.hackReset = true
+        })
+    },
+    beforeRouteLeave(to, from, next) {
+        let toRoute = to.path
+        // let fromRoute = from.path
+        if (toRoute.indexOf('/questdetail') !== -1) {
+            from.meta.keepAlive = true
+        } else {
+            from.meta.keepAlive = false
+        }
+        next()
     }
 }
 </script>
