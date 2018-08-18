@@ -36,21 +36,5 @@ export default new Router({
             meta: { title: '问题详情' },
             component: resolve => require(['./components/QuestDetail'], resolve)
         }
-    ],
-    afterEach(to, from) {
-        let toRoute = to.path
-        let fromRoute = from.path
-        console.log('afterEach')
-        if (fromRoute.indexOf('/index') !== -1 && toRoute.indexOf('/searchlist') !== -1) {
-            let isRefresh = sessionStorage.getItem('isRefresh')
-            if (isRefresh === '0') {
-                sessionStorage.setItem('isRefresh', null)
-                window.location.reload()
-            } else {
-                sessionStorage.setItem('isRefresh', '0')
-            }
-        } else if (fromRoute.indexOf('/searchlist') !== -1 && toRoute.indexOf('/index') !== -1) {
-            sessionStorage.setItem('isRefresh', '0')
-        }
-    }
+    ]
 })

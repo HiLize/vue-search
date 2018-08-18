@@ -36,7 +36,7 @@ export default {
         }
     },
     mounted() {
-        this.getInfo()
+        // this.getInfo()
     }
 }
 </script>
