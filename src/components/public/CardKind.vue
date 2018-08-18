@@ -8,9 +8,9 @@
                 <div v-for="(info, i) in data" :key="'column' + i" class="kind" @click="onClickKind($event, info)">
                     <div class="subTitle">{{info}}</div>
                     <p>
-                        <span v-for="(quest, index) in questList" :key="index + info" v-if="quest.cate === info">{{quest.question}}</span>
+                        <span v-for="(quest, index) in questObj[info]" :key="index + info">{{quest.question}}</span>
                     </p>
-                    <span v-if="info">......</span>
+                    <span v-if="typeof questObj[info] !== 'undefined' && questObj[info].length >= 2">......</span>
                 </div>
                 <!-- 最后一行不现实分割线 -->
                 <Divider v-if="index < (dataArr.length - 1)" :key="index + 'divider'"/>
@@ -31,6 +31,7 @@ export default {
     data() {
         return {
             dataArr: [],
+            questObj: {},
             count: 0
         }
     },
@@ -51,10 +52,28 @@ export default {
                     this.dataArr[lastIndex].push(null) 
                 }
             }
+        },
+        rebuildQuestList() {
+            let cates = this.data
+            let questions = this.questList
+            let obj = this.questObj
+            if (cates.length > 0) {
+                for (let i = 0; i < questions.length; i++) {
+                    for (let j = 0; j < cates.length; j++) {
+                        if (questions[i].cate === cates[j]) {
+                            if (typeof obj[cates[j]] === 'undefined') {
+                                obj[cates[j]] = []
+                            }
+                            obj[cates[j]].push(questions[i])
+                        }
+                    }
+                }
+            }
         }
     },
     mounted() {
         this.rebuildData()
+        this.rebuildQuestList()
     }
 }
 </script>
