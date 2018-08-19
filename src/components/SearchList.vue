@@ -1,5 +1,5 @@
 <template>
-    <Layout v-if="hackReset" :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
+    <Layout v-if="isRefresh" :backIconClick="backIconClick" :isFocus="true" :isListenerScroll="true" :searchHandler="searchHandler">
         <!-- <Loading slot="content" v-if="isLoading" /> -->
 
         <div slot="content" ref="content" v-if="questList !== null && questList.length">
@@ -62,7 +62,7 @@ export default {
                 }
             ],
             keyword: '',
-            hackReset: true
+            isRefresh: true
         }
     },
     methods: {
@@ -85,16 +85,16 @@ export default {
         }
     },
     activated() {
-        // 页面离开的时候this.hackReset 设置为了false，这时候v-if发挥作用销毁了‘list’，所以会获取不到，也就不需要设置位置了，this.hackReset=true,会重新渲染组件
+        // 页面离开的时候this.isRefresh 设置为了false，这时候v-if发挥作用销毁了‘list’，所以会获取不到，也就不需要设置位置了，this.isRefresh=true,会重新渲染组件
         if (document.getElementById('list') !== null) {
-            let path = this.$route.path
-            let position =sessionStorage.getItem(path) //返回页面取出来
+            let pathName = this.$route.name
+            let position =sessionStorage.getItem(pathName) //返回页面取出来
             position = position === null ? 0 : position
             document.getElementById('list').scrollTop = position
         }
 
         this.$nextTick(() => {
-            this.hackReset = true
+            this.isRefresh = true
         })
     },
     beforeRouteEnter(to, from, next) {
@@ -103,16 +103,16 @@ export default {
     },
     beforeRouteLeave(to, from, next) {
         let toRoute = to.path
-        let fromRoute = from.path
+        let fromName = from.name
 
         let position = document.getElementById('list').scrollTop
-        sessionStorage.setItem(fromRoute, position)
+        sessionStorage.setItem(fromName, position)
 
         if (toRoute.indexOf('/questdetail') === -1) {
-            // 只要不是去detail页面，就将hackReset置为false，下次进来的时候v-if会销毁组件，然后再在activated设置为true，重新渲染
-            this.hackReset = false
+            // 只要不是去detail页面，就将isRefresh置为false，下次进来的时候v-if会销毁组件，然后再在activated设置为true，重新渲染
+            this.isRefresh = false
             this.keyword = '' // card中的匹配keyword还会匹配，设置为空，即不再匹配
-            sessionStorage.removeItem(fromRoute)
+            sessionStorage.removeItem(fromName)
         }
         next()
     }
