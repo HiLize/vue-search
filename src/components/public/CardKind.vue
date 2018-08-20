@@ -59,6 +59,7 @@ export default {
             let cates = this.data
             let questions = this.questList
             let obj = this.questObj
+           // 按照分类分数组 
             if (cates !== null && cates.length > 0) {
                 for (let i = 0; i < questions.length; i++) {
                     for (let j = 0; j < cates.length; j++) {

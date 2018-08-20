@@ -10,7 +10,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-    // mode: 'history', // 默认是hash会加#， 这样window.location.search娶到为空，按照？来获取
+    // mode: 'history', // 默认是hash会加#， 这样window.location.search取到为空，按照？来获取
     routes: [
         {
             path: '/',

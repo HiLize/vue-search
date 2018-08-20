@@ -29,7 +29,7 @@ export default {
     },
     data() {
         return {
-            keyword: (sessionStorage.getItem('keyword') !== null && sessionStorage.getItem('keyword') !== "undefined") ? sessionStorage.getItem('keyword') : ''
+            keyword: ''
         }
     },
     methods: {
