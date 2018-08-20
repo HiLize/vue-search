@@ -29,38 +29,7 @@ export default {
     data() {
         return {
             isLoading: false,
-            questList: [
-                {
-                    cate: '一卡通',
-                    question: '如何挂失一卡通',
-                    answer: '一卡通若校园卡丢失，请本人立刻按一卡通照以下途径之一进行挂失： 自助服务终端上挂失自助若校园卡丢失一卡通，自助服务终端上挂失自助若校园卡丢失, 自助服务终端上挂失自助若校园卡丢失'
-                },
-                {
-                    cate: '校园网',
-                    question: '如何挂失一卡通',
-                    answer: '一卡通若校园卡丢失，请本人立刻按一卡通照以下途径之一进行挂失： 自助服务终端上挂失自助若校园卡丢失一卡通，自助服务终端上挂失自助若校园卡丢失, 自助服务终端上挂失自助若校园卡丢失'
-                },
-                {
-                    cate: '图书馆',
-                    question: '如何挂失一卡通',
-                    answer: '一卡通若校园卡丢失，请本人立刻按一卡通照以下途径之一进行挂失： 自助服务终端上挂失自助若校园卡丢失一卡通，自助服务终端上挂失自助若校园卡丢失, 自助服务终端上挂失自助若校园卡丢失'
-                },
-                {
-                    cate: '一卡通',
-                    question: '如何挂失一卡通',
-                    answer: '一卡通若校园卡丢失，请本人立刻按一卡通照以下途径之一进行挂失： 自助服务终端上挂失自助若校园卡丢失一卡通，自助服务终端上挂失自助若校园卡丢失, 自助服务终端上挂失自助若校园卡丢失'
-                },
-                {
-                    cate: '校园网',
-                    question: '如何挂失一卡通',
-                    answer: '一卡通若校园卡丢失，请本人立刻按一卡通照以下途径之一进行挂失： 自助服务终端上挂失自助若校园卡丢失一卡通，自助服务终端上挂失自助若校园卡丢失, 自助服务终端上挂失自助若校园卡丢失'
-                },
-                {
-                    cate: '图书馆',
-                    question: '如何挂失一卡通',
-                    answer: '一卡通若校园卡丢失，请本人立刻按一卡通照以下途径之一进行挂失： 自助服务终端上挂失自助若校园卡丢失一卡通，自助服务终端上挂失自助若校园卡丢失, 自助服务终端上挂失自助若校园卡丢失'
-                }
-            ],
+            questList: null,
             keyword: '',
             isRefresh: true
         }
@@ -70,6 +39,10 @@ export default {
             this.$router.go(-1)
         },
         searchHandler(keyword) {
+            // 搜索的时候要把scrollTop置为0
+            sessionStorage.removeItem(this.$route.name)
+            document.getElementById('list').scrollTop = 0
+
             this.isLoading = true
             this.keyword = keyword
             let params = {
@@ -78,10 +51,10 @@ export default {
             if (this.$route.params.cate !== '') {
                 params.cate = this.$route.params.cate
             }
-            //getQuestList(params).then(data => {
-                //this.questList = data
-                //this.isLoading = false
-            //})
+            getQuestList(params).then(data => {
+                this.questList = data
+                this.isLoading = false
+            })
         }
     },
     activated() {
@@ -112,6 +85,7 @@ export default {
             // 只要不是去detail页面，就将isRefresh置为false，下次进来的时候v-if会销毁组件，然后再在activated设置为true，重新渲染
             this.isRefresh = false
             this.keyword = '' // card中的匹配keyword还会匹配，设置为空，即不再匹配
+            this.questList = null // layout v-if 但是内部的内容没有变化重置，所以要手动置为null。初始状态
             sessionStorage.removeItem(fromName)
         }
         next()
