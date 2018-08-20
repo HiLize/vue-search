@@ -4,6 +4,7 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+// 全局设置路由配置
 // router.afterEach((to, from) => {
 //   let toRoute = to.path
 //         let fromRoute = from.path
