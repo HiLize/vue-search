@@ -63,7 +63,6 @@ export default {
         })
     },
     beforeRouteEnter(to, from, next) {
-        // console.log(this, 'beforeRouteEnter')
         next()
     },
     beforeRouteLeave(to, from, next) {
@@ -75,6 +74,7 @@ export default {
         if (toRoute.indexOf('/questdetail') === -1) {
             // 只要不是去detail页面，就将isRefresh置为false，下次进来的时候v-if会销毁组件，然后再在activated设置为true，重新渲染
             this.isRefresh = false
+            this.cateList = null
             sessionStorage.removeItem(fromName)
         }
         next()

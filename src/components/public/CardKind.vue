@@ -1,6 +1,6 @@
 
 <template>
-    <div class="card">
+    <div class="card" v-if="data !== null">
         <div class="text">
             <!-- 行 -->
             <div class="rowText" v-for="(data, index) in dataArr" :key="'row' + index">
@@ -40,16 +40,18 @@ export default {
             this.$router.push(`/questkind/${kindid}`)
         },
         rebuildData() {
-            // 重组data，使其可循环显示多行，每行3列
-             for(var i = 0,len = this.data.length; i < len; i += 3){
-                this.dataArr.push(this.data.slice(i,i+3));
-            }
-            let lastIndex = this.dataArr.length - 1
-            // 最后一行不足3列的，填满3列占位（因为flex-item使用的均分大小）
-            if(this.dataArr[lastIndex].length / 3 !== 0) {
-                let length = 3 - this.dataArr[lastIndex].length
-                for (let i = 0; i < length; i++) {
-                    this.dataArr[lastIndex].push(null) 
+            if (this.data !== null) {
+                // 重组data，使其可循环显示多行，每行3列
+                for(var i = 0,len = this.data.length; i < len; i += 3){
+                    this.dataArr.push(this.data.slice(i,i+3));
+                }
+                let lastIndex = this.dataArr.length - 1
+                // 最后一行不足3列的，填满3列占位（因为flex-item使用的均分大小）
+                if(typeof this.dataArr[lastIndex] !== 'undefined' && this.dataArr[lastIndex].length / 3 !== 0) {
+                    let length = 3 - this.dataArr[lastIndex].length
+                    for (let i = 0; i < length; i++) {
+                        this.dataArr[lastIndex].push(null)
+                    }
                 }
             }
         },
@@ -57,7 +59,7 @@ export default {
             let cates = this.data
             let questions = this.questList
             let obj = this.questObj
-            if (cates.length > 0) {
+            if (cates !== null && cates.length > 0) {
                 for (let i = 0; i < questions.length; i++) {
                     for (let j = 0; j < cates.length; j++) {
                         if (questions[i].cate === cates[j]) {

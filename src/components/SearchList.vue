@@ -71,7 +71,6 @@ export default {
         })
     },
     beforeRouteEnter(to, from, next) {
-        // console.log(this, 'beforeRouteEnter')
         next()
     },
     beforeRouteLeave(to, from, next) {

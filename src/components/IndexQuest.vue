@@ -1,6 +1,6 @@
 <template>
     <Layout v-show="!isShowDetail" :backIconClick="backIconClick">
-        <div class="container" ref="list" slot="content" v-if="cate !== null && cate.length > 0 && list !== null">
+        <div class="container" ref="list" slot="content" v-if="cate !== null && list !== null">
             <div class="scollTitle">燕大机器人</div>
             <CardKind :data="cate" :questList="list"/>
             <div class="common">常见问题</div>

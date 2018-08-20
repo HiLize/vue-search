@@ -3,6 +3,7 @@ import {GetQueryString} from '@/utils'
 
 let tenantId = GetQueryString('tenantId')
 tenantId = tenantId === null ? 'wisedu' : tenantId
+
 // 获取分类列表
 export const getCate = () => {
     return get('/cate/list?tenantId=' + tenantId)
